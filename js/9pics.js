@@ -11,7 +11,6 @@ $(document).ready(function () {
         var time = date + "," + month + " " + year + " " + hour + ":" + min + ":" + sec;
         return time;
     }
-    var reddit_url = "http://api.reddit.com/r/pics.json?jsonp=?";
 
     $('#reload').click(function(){
     	$('#reddit_container').empty();
@@ -19,11 +18,15 @@ $(document).ready(function () {
     	var reddit_url = "http://api.reddit.com/r/" + subreddit + ".json?jsonp=?";
     	load_page(reddit_url);
     });
+
+    var subreddit = $('#subreddit').val().length > 0 ? $('#subreddit').val() : 'pics';
+
+    var reddit_url = "http://api.reddit.com/r/" + subreddit + ".json?jsonp=?";
     var uri = new URI(document.URL),
         synthax = uri.query(true);
     var lastid;
     if (synthax.after != null) {
-        reddit_url = "http://api.reddit.com/r/pics.json?jsonp=?&count=25&after=" + synthax.after;
+        reddit_url += "&count=25&after=" + synthax.after;
     }
 
     load_page(reddit_url);
