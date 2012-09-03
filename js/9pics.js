@@ -12,6 +12,13 @@ $(document).ready(function () {
         return time;
     }
     var reddit_url = "http://api.reddit.com/r/pics.json?jsonp=?";
+
+    $('#reload').click(function(){
+    	$('#reddit_container').empty();
+    	var subreddit =	($('#subreddit').val().length > 0) ? $('#subreddit').val() : 'pics';
+    	var reddit_url = "http://api.reddit.com/r/" + subreddit + ".json?jsonp=?";
+    	load_page(reddit_url);
+    });
     var uri = new URI(document.URL),
         synthax = uri.query(true);
     var lastid;
